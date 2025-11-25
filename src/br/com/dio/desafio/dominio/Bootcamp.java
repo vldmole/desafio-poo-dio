@@ -7,64 +7,92 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Bootcamp {
-    private String nome;
-    private String descricao;
-    private final LocalDate dataInicial = LocalDate.now();
-    private final LocalDate dataFinal = dataInicial.plusDays(45);
-    private Set<Dev> devsInscritos = new HashSet<>();
-    private Set<Conteudo> conteudos = new LinkedHashSet<>();
 
+    private String name;
+    private String description;
+    private final LocalDate startDate = LocalDate.now();
+    private final LocalDate endDate = startDate.plusDays(45);
+    private Set<Developer> registrations = new HashSet<>();
+    private Set<Content> contents = new LinkedHashSet<>();
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public LocalDate getDataInicial() {
-        return dataInicial;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public LocalDate getDataFinal() {
-        return dataFinal;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public Set<Dev> getDevsInscritos() {
-        return devsInscritos;
+    public Set<Developer> getRegistrations() {
+        return registrations;
     }
 
-    public void setDevsInscritos(Set<Dev> devsInscritos) {
-        this.devsInscritos = devsInscritos;
+    public void setRegistrations(Set<Developer> devsInscritos) {
+        this.registrations = devsInscritos;
     }
 
-    public Set<Conteudo> getConteudos() {
-        return conteudos;
+    public Set<Content> getContents() {
+        return contents;
     }
 
-    public void setConteudos(Set<Conteudo> conteudos) {
-        this.conteudos = conteudos;
+    public void setConteudos(Set<Content> conteudos) {
+        this.contents = conteudos;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Bootcamp bootcamp = (Bootcamp) o;
-        return Objects.equals(nome, bootcamp.nome) && Objects.equals(descricao, bootcamp.descricao) && Objects.equals(dataInicial, bootcamp.dataInicial) && Objects.equals(dataFinal, bootcamp.dataFinal) && Objects.equals(devsInscritos, bootcamp.devsInscritos) && Objects.equals(conteudos, bootcamp.conteudos);
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        Bootcamp bootcamp = (Bootcamp) other;
+
+        return (Objects.equals(name, bootcamp.name)
+                && Objects.equals(description, bootcamp.description)
+                && Objects.equals(startDate, bootcamp.startDate)
+                && Objects.equals(endDate, bootcamp.endDate)
+                && Objects.equals(registrations, bootcamp.registrations)
+                && Objects.equals(contents, bootcamp.contents));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, descricao, dataInicial, dataFinal, devsInscritos, conteudos);
+        return Objects.hash(name, description, startDate, endDate, registrations, contents);
+    }
+
+    public void addContent(Content content) {
+
+        if (this.contents.contains(content)) {
+            return;
+        }
+
+        this.contents.add(content);
+    }
+
+    public void addRegistration(Developer developer) {
+
+        if (this.registrations.contains(developer)) {
+            return;
+        }
+
+        this.registrations.add(developer);
     }
 }
